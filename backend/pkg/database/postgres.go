@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+    "strings"
 
 	"github.com/google/uuid"
 	"github.com/myfarism/finance-tracker/internal/domain"
@@ -17,7 +18,11 @@ func Connect() {
     var dsn string
 
     if url := os.Getenv("DATABASE_URL"); url != "" {
-        dsn = url
+        if !strings.Contains(url, "sslmode") {
+            dsn = url + "?sslmode=require"
+        } else {
+            dsn = url
+        }
     } else {
         host     := os.Getenv("DB_HOST")
         port     := os.Getenv("DB_PORT")
