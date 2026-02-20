@@ -1,12 +1,24 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import path from "path";
 
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+  build: {
+    outDir: "dist",
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // React core
+          "vendor-react": ["react", "react-dom", "react-router-dom"],
+          // State management + form
+          "vendor-store": ["zustand", "react-hook-form", "@hookform/resolvers", "zod"],
+          // Charts
+          "vendor-charts": ["recharts"],
+          // HTTP
+          "vendor-axios": ["axios"],
+        },
+      },
     },
   },
 });

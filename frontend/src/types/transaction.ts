@@ -6,8 +6,6 @@ export interface Category {
   icon: string;
 }
 
-export type TransactionType = "income" | "expense";
-
 export interface Category {
   id: string;
   name: string;

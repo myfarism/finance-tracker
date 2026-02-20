@@ -6,16 +6,21 @@ import { transactionAPI } from "../api/transaction";
 import { useTransactionStore } from "../store/transactionStore";
 import { Transaction } from "../types/transaction";
 
+type FormData = {
+  category_id: string;
+  type: "income" | "expense";
+  amount: number;
+  description?: string;
+  date: string;
+};
+
 const schema = z.object({
   category_id: z.string().min(1, "Pilih kategori"),
   type: z.enum(["income", "expense"]),
-  amount: z.coerce.number().min(1, "Nominal harus lebih dari 0"),
+  amount: z.number().min(1, "Nominal harus lebih dari 0"),
   description: z.string().optional(),
   date: z.string().min(1, "Pilih tanggal"),
 });
-
-
-type FormData = z.infer<typeof schema>;
 
 interface Props {
   onClose: () => void;
@@ -133,7 +138,7 @@ export default function TransactionForm({ onClose, editData }: Props) {
                 Rp
               </span>
               <input
-                {...register("amount")}
+                {...register("amount", { valueAsNumber: true })}
                 type="number"
                 placeholder="0"
                 className="w-full border border-slate-200 bg-white rounded-lg pl-9 pr-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"

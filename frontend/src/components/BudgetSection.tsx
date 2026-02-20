@@ -7,12 +7,15 @@ import { budgetAPI } from "../api/transaction";
 import { useTransactionStore } from "../store/transactionStore";
 import { formatCurrency } from "../utils/format";
 
+type FormData = {
+  category_id: string;
+  amount: number;
+};
+
 const schema = z.object({
   category_id: z.string().min(1, "Pilih kategori"),
-  amount: z.coerce.number().min(1, "Masukkan nominal"),
+  amount: z.number().min(1, "Masukkan nominal"),
 });
-
-type FormData = z.infer<typeof schema>;
 
 interface Props {
   budgets: Budget[];
@@ -86,7 +89,7 @@ export default function BudgetSection({ budgets, categories, month, year }: Prop
                 Rp
               </span>
               <input
-                {...register("amount")}
+                {...register("amount", { valueAsNumber: true })}
                 type="number"
                 placeholder="500000"
                 className="w-full border border-slate-200 bg-white rounded-lg pl-9 pr-3 py-2 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
