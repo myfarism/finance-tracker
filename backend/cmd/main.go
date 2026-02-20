@@ -3,6 +3,7 @@ package main
 import (
     "log"
     "os"
+    "fmt"
 
     "github.com/gin-gonic/gin"
     "github.com/joho/godotenv"
@@ -95,7 +96,16 @@ func main() {
         }
     }
 
+    if os.Getenv("GIN_MODE") == "release" {
+        gin.SetMode(gin.ReleaseMode)
+    }
+
     port := os.Getenv("PORT")
+    if port == "" {
+        port = "8080"
+    }
+
+    fmt.Printf("Server running on port %s\n", port)
     log.Printf("🚀 Server running on port %s", port)
-    r.Run(":" + port)
+    r.Run("0.0.0.0:" + port)
 }
