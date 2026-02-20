@@ -57,6 +57,10 @@ func main() {
         c.JSON(200, gin.H{"status": "ok"})
     })
 
+    r.GET("/api/v1/health", func(c *gin.Context) {
+    c.JSON(200, gin.H{"status": "ok"})
+})
+
     api := r.Group("/api/v1")
     {
         // Public routes
