@@ -2,8 +2,8 @@
 
 Aplikasi manajemen keuangan pribadi berbasis web yang dibangun dengan arsitektur fullstack modern. Memungkinkan pengguna mencatat pemasukan dan pengeluaran, memantau saldo bulanan, mengatur budget per kategori, serta mengekspor data transaksi.
 
-🔗 **Live Demo:** `https://finance-tracker-mu.vercel.app` *(coming soon)*  
-📦 **API Base URL:** `https://finance-tracker-api.up.railway.app/api/v1` *(coming soon)*
+🔗 **Live Demo:** *(coming soon)*  
+📦 **API Base URL:** *(coming soon)*
 
 ---
 
